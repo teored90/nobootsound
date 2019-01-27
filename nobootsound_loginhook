@@ -1,9 +1,9 @@
 #!/bin/bash
-# Read the value stored in .noboot_logoutvol to determine wether the
-# computer was muted before shutdown
 
+# Read the value stored in .nobootsound_logoutvol to determine the volume
+# before shutdown
 logoutvolume="/Library/LogHook/nobootsound_logoutvol"
-
 read val < "$logoutvolume"
-logger "Nobootsound restoring volume to previous value. Mute: $val"
-osascript -e "if not $val then set volume without output muted"
+logger "Nobootsound restoring volume to previous value. % volume: $val"
+
+osascript -e "set volume output volume $val --100%"
